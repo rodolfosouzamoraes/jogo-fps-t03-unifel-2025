@@ -6,10 +6,21 @@ public class ArmaControlador : MonoBehaviour
 {
     public int municaoPorPente; //Munição máxima que o pente da arma pode ter
     public int municaoMaxima;//Total de munição máxima que arma pode ter
+    public GameObject muzzleFlash; //Fogo que sai após atirar
+    public GameObject capsula; //Capusa que será ejetada ao atirar
+    public Transform posicaoCapsula; //Posição da casula a ser ejeta
     [SerializeField] private int pente; //A munção atual no pente da arma
     [SerializeField] private int municaoAtual;//Munição atual que a arma tem
 
     private Animator animator;
+
+    public int Pente{
+        get{return pente;}
+    }
+
+    public int MunicaoAtual{
+        get{return municaoAtual;}
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -99,8 +110,14 @@ public class ArmaControlador : MonoBehaviour
     }
 
     private void InstanciarBala(){
+        //Emitir o dano ao objeto
+        PlayerMng.DisparoPlayer.DanoAoObjeto();
+
         //Decrementar munição no pente
         pente--;
+
+        //Ativar o MuzzleFlash
+        muzzleFlash.SetActive(true);
 
         //Verificar se acabou a munição no pente
         if(pente <= 0){
@@ -110,5 +127,20 @@ public class ArmaControlador : MonoBehaviour
             //Forçar que o pente fique em 0
             pente = 0;
         }
+
+        //Ejetar a capsula
+        EjetarCapsula();
+    }
+
+    private void EjetarCapsula(){
+        //Instanciar a casula
+        GameObject novaCapsula = Instantiate(capsula);
+
+        //Posicionar na posição e rotação da qual a capsula será ejetada
+        novaCapsula.transform.position = posicaoCapsula.position;
+        novaCapsula.transform.rotation = posicaoCapsula.rotation;
+
+        //Chamar o método para ejetar a capula
+        novaCapsula.GetComponent<EjetarCapsula>().Ejetar();
     }
 }

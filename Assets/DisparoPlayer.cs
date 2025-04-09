@@ -7,7 +7,13 @@ public class DisparoPlayer : MonoBehaviour
     public ArmaControlador pistolaControlador; //Variavel para manipular a pistola do jogador
     public ArmaControlador fuzilControlador;
     public int idArmaAtiva = 1; //Diz qual arma está ativa, 1 - Pistola, 2 - Fuzil.
+    public GameObject impactoBalaInimigo;
+    public GameObject impactoBalaObjetos;
     private ArmaControlador armaAtiva;//O controlador da arma que está ativa
+
+    public ArmaControlador ArmaAtiva {
+        get {return armaAtiva;}
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -85,5 +91,39 @@ public class DisparoPlayer : MonoBehaviour
     public void DesabilitarArmas(){
         pistolaControlador.gameObject.SetActive(false);
         fuzilControlador.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// Método para dar dano aos inimigos e instanciar os efeitos de impacto
+    /// </summary>
+    public void DanoAoObjeto(){
+        //Verificar se camera está vendo algum objeto
+        if(PlayerMng.VisaoCamera.AlvoVisto != null){
+            //Calcular a rotação inversa da colisão
+            Quaternion rotacaoImpacto = Quaternion.FromToRotation(
+                Vector3.forward,
+                PlayerMng.VisaoCamera.hitAlvo.normal
+            );
+
+            //Verificar se está vendo o inimigo
+            if(PlayerMng.VisaoCamera.tagAlvo == "Inimigo"){
+                //Emitir o efeito de impacto com o inimigo
+                Instantiate(
+                    impactoBalaInimigo,
+                    PlayerMng.VisaoCamera.hitAlvo.point,
+                    rotacaoImpacto
+                );
+
+                //Decrementar a vida do inimigo
+            }
+            else{
+                //Emitir o efeito de impacto com objetos que não sejam inimigos
+                Instantiate(
+                    impactoBalaObjetos,
+                    PlayerMng.VisaoCamera.hitAlvo.point,
+                    rotacaoImpacto
+                );
+            }
+        }
     }
 }
