@@ -143,4 +143,15 @@ public class ArmaControlador : MonoBehaviour
         //Chamar o método para ejetar a capula
         novaCapsula.GetComponent<EjetarCapsula>().Ejetar();
     }
+
+    public void IncrementarMunicao(int municao){
+        //Incrementar na munição atual a nova quantidade de municao
+        municaoAtual += municao;
+
+        //Verificar se a munição atual ultrapassou o limite máximo de munição
+        if(municaoAtual > municaoMaxima){
+            //Definir a munição maxima na munição atual
+            municaoAtual = municaoMaxima;
+        }
+    }
 }

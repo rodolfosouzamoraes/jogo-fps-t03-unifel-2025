@@ -86,7 +86,7 @@ public class DisparoPlayer : MonoBehaviour
     }
 
     /// <summary>
-    /// Método para desativar as armas após o jogador morrer
+    /// Método para desativar as armas após o jogador morrer ou o jogo acabar
     /// </summary>
     public void DesabilitarArmas(){
         pistolaControlador.gameObject.SetActive(false);
@@ -125,5 +125,15 @@ public class DisparoPlayer : MonoBehaviour
                 );
             }
         }
+    }
+
+    public void IncrementarMunicaoPistola(int municao){
+        //Acessar a pistola e incrementar a municao
+        pistolaControlador.IncrementarMunicao(municao);
+    }
+
+    public void IncrementarMunicaoFuzil(int municao){
+        //Acessar a fuzil e incrementar a municao
+        fuzilControlador.IncrementarMunicao(municao);
     }
 }
