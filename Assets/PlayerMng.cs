@@ -35,4 +35,16 @@ public class PlayerMng : MonoBehaviour
             lanterna.SetActive(!lanterna.activeSelf);
         }
     }
+
+    public void MatarJogador(){
+        
+        //Remover o collider do jogador para não haver colisão
+        Destroy(GetComponent<CapsuleCollider>());
+
+        //Definir que o jogo acabou
+        CanvasGameMng.Instance.fimDeJogo = true;
+
+        //Desabilitar as armas
+        DisparoPlayer.DesabilitarArmas();
+    }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ArmaControlador : MonoBehaviour
 {
+    public float danoInimigo;
     public int municaoPorPente; //Munição máxima que o pente da arma pode ter
     public int municaoMaxima;//Total de munição máxima que arma pode ter
     public GameObject muzzleFlash; //Fogo que sai após atirar

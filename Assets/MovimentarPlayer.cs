@@ -38,6 +38,9 @@ public class MovimentarPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Verificar se o jogo acabou
+        if(CanvasGameMng.Instance.fimDeJogo == true) return;
+
         //Movimentar o player nos eixos X, Y e Z
         MovimentarXYZ();
 

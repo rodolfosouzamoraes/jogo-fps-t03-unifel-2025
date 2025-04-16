@@ -24,6 +24,9 @@ public class DisparoPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Verificar se o jogo acabou
+        if(CanvasGameMng.Instance.fimDeJogo == true) return;
+
         SelecionarArma();
         DispararArma();
         RecarregarArma();
@@ -114,7 +117,11 @@ public class DisparoPlayer : MonoBehaviour
                     rotacaoImpacto
                 );
 
+                //Obter a referencia do inimigo que vai sofrer dano
+                var inimigo = PlayerMng.VisaoCamera.AlvoVisto.GetComponent<InimigoControlador>();
+                
                 //Decrementar a vida do inimigo
+                inimigo.DecrementarVida(armaAtiva.danoInimigo);
             }
             else{
                 //Emitir o efeito de impacto com objetos que não sejam inimigos

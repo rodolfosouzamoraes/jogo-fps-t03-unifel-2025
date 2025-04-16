@@ -1,6 +1,7 @@
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CanvasGameMng : MonoBehaviour
 {
@@ -37,6 +38,9 @@ public class CanvasGameMng : MonoBehaviour
     public TextMeshProUGUI txtTotalZumbisMortos;
     private int totalZumbisMortos;
     private int tempoFinal;
+
+    [Header("Configuração Game Over")]
+    public GameObject pnlGameOver;
 
     // Start is called before the first frame update
     void Start()
@@ -163,6 +167,7 @@ public class CanvasGameMng : MonoBehaviour
         pnlFimDeJogo.SetActive(true);
 
         //Salvar os dados
+        //...
 
         //Desabilitar as armas
         PlayerMng.DisparoPlayer.DesabilitarArmas();
@@ -170,5 +175,42 @@ public class CanvasGameMng : MonoBehaviour
         //Desbloquear o mouse
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+
+    public void DecrementarVidaJogador(int dano){
+        //Verificar se o jogo acabou
+        if(fimDeJogo == true) return;
+
+        //decrementar a vida do jogador
+        vidaJogador -= dano;
+
+        //Verificar se o jogador ficou sem vidas
+        if(vidaJogador <= 0){
+            //Zero a vida jogador
+            vidaJogador = 0;
+
+            //Matar jogador
+            PlayerMng.Instance.MatarJogador();
+
+            //Ocultar um painel de status do jogador
+            pnlStatusPlayer.SetActive(false);
+
+            //Exibir um painel de game over
+            pnlGameOver.SetActive(true);
+
+            //Reiniciar a fase depois de um tempo
+            Invoke("ReiniciarJogo",4.5f);
+        }
+
+        //Atualizar o texto da vida do player
+        txtVida.text = $"+{vidaJogador}";
+    }
+
+    private void ReiniciarJogo(){
+        //Exibir tela de carregamento
+        //...
+
+        //Reiniciar a cena do jogo
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
