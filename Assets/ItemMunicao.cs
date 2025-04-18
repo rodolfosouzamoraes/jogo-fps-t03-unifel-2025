@@ -8,12 +8,18 @@ public class ItemMunicao : MonoBehaviour
     public GameObject pentePistola; 
     public GameObject penteFuzil;
     public TextMeshProUGUI txtQtdMunicao;
+    public GameObject iconePistola;
+    public GameObject iconeFuzil;
     private int municaoParaPistola;
     private int municaoParaFuzil;
     private int idArma; //1 - Pistola / 2 - Fuzil
     // Start is called before the first frame update
     void Start()
     {
+        //Desativar os icones ao iniciar
+        iconePistola.SetActive(false);
+        iconeFuzil.SetActive(false);
+
         //Desativar os gameObjects das armas
         pentePistola.SetActive(false);
         penteFuzil.SetActive(false);
@@ -31,6 +37,9 @@ public class ItemMunicao : MonoBehaviour
 
                 //Ativar o gameobject da pistola
                 pentePistola.SetActive(true);
+
+                //Ativar o icone da pistola
+                iconePistola.SetActive(true);
             break;
             case 2:
                 //Gerar munição aleatória para a fuzil
@@ -41,6 +50,9 @@ public class ItemMunicao : MonoBehaviour
 
                 //Ativar o gameobject da fuzil
                 penteFuzil.SetActive(true);
+
+                //Ativar o icone do fuzil
+                iconeFuzil.SetActive(true);
             break;
         }
 

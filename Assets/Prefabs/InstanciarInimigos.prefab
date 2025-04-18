@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8288889218424050774
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5369374764901824355}
+  - component: {fileID: 3798396893391828669}
+  m_Layer: 0
+  m_Name: InstanciarInimigos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5369374764901824355
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8288889218424050774}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3798396893391828669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8288889218424050774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d1c1c26f037fc342940a84ffa37d4a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inimigos:
+  - {fileID: 7279301864006414094, guid: b5f2648804d893c42bf4a77230ccc24e, type: 3}
+  - {fileID: 5440148443401890379, guid: ab76e5f84b50f4541a2b0f86eaaea004, type: 3}
+  - {fileID: 5438670310939536915, guid: afd981b0a3b10db43a3c53539d220d7f, type: 3}
+  - {fileID: 8688664866942004193, guid: 0ed7b699081b4074e8ced80394c2719d, type: 3}
+  - {fileID: 255401078602742083, guid: 9b9f0f52cf4f0b9419d957a48dcc2a43, type: 3}
+  - {fileID: 4489258324138598932, guid: 6fbc72a579b54d041b9d37ffe858348d, type: 3}
+  - {fileID: 2315751347855757583, guid: 5d5695bc83719d74f8c451239afbf8b4, type: 3}
+  - {fileID: 6326658322987057472, guid: c852ed2a317d6674e97533b833b15d42, type: 3}
+  tempoDeEspera: 10
+  maximoInimigosNaFase: 100
+  distanciaInicialParaNovoInimigo: 50
+  distanciaParaNovoInimigo: 20

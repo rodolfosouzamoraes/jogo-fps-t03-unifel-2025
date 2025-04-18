@@ -213,4 +213,9 @@ public class CanvasGameMng : MonoBehaviour
         //Reiniciar a cena do jogo
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    public void IncrementarMortesZumbi(){
+        //Incrementar na variável um zumbi morto
+        totalZumbisMortos++;
+    }
 }

@@ -17,7 +17,7 @@ public class InimigoControlador : MonoBehaviour
     private bool estaMorto;//Define se o inimigo morreu
     private bool estaVendoPlayer;//Define se o inimigo está vendo o player
     private SuporteAnimacaoInimigo animacaoInimigo; //Controlar as animações do inimigo
-
+    private InstanciarInimigos instanciarInimigos; //Variavel do script que controla os inimigos no jogo
 
     // Start is called before the first frame update
     void Start()
@@ -161,10 +161,10 @@ public class InimigoControlador : MonoBehaviour
             estaMorto = true;
 
             //Incrementar na contagem de inimigos mortos
-            //...
+            CanvasGameMng.Instance.IncrementarMortesZumbi();
 
             //Decrementar a quantidade de inimigos no jogo para instanciar novos
-            //...
+            instanciarInimigos.DecrementarInimigosInstanciados();
 
             //Definir que o inimigo fique na posição que ele morreu
             agent.destination = transform.position;
@@ -178,5 +178,13 @@ public class InimigoControlador : MonoBehaviour
             //Destruir o inimigo depois de um tempo
             Destroy(gameObject,5f);
         }
+    }
+
+    /// <summary>
+    /// Método para poder referenciar o script que controla a quantidade de inimigos no jogo
+    /// </summary>
+    public void ReferenciarInimigo(InstanciarInimigos referencia){
+        //Referenciar o script na variavel
+        instanciarInimigos = referencia;
     }
 }
