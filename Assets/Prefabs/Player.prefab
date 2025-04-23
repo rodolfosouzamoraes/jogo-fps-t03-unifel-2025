@@ -2908,6 +2908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tagAlvo: 
+  cameraPlayer: {fileID: 4433833265068362680}
 --- !u!1 &4716031781441333902
 GameObject:
   m_ObjectHideFlags: 0
@@ -5854,6 +5855,7 @@ GameObject:
   - component: {fileID: 1509383245384603468}
   - component: {fileID: 1767171477868128545}
   - component: {fileID: 2647386128105471300}
+  - component: {fileID: 732711290156978496}
   m_Layer: 8
   m_Name: CameraMiniMapa
   m_TagString: Untagged
@@ -5971,6 +5973,19 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &732711290156978496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7984804313052636919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4210c0ab767c72646988714bb2d291c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraMiniMapa: {fileID: 1767171477868128545}
 --- !u!1 &8102895039635679662
 GameObject:
   m_ObjectHideFlags: 0

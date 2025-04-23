@@ -8,6 +8,8 @@ public class VisaoCamera : MonoBehaviour
     public string tagAlvo;//A tag do alvo visto
     public RaycastHit hitAlvo; //Obter os dados do objeto
 
+    public GameObject cameraPlayer;
+
     public GameObject AlvoVisto{
         get{return alvo;}
     }
@@ -57,5 +59,9 @@ public class VisaoCamera : MonoBehaviour
             tagAlvo = "";
             alvo = null;
         }
+    }
+
+    public void DesativarCameraPlayer(){
+        cameraPlayer.SetActive(false);
     }
 }

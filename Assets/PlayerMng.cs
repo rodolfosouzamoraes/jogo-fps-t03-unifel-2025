@@ -24,7 +24,7 @@ public class PlayerMng : MonoBehaviour
     public GameObject lanterna;
     void Start()
     {
-        lanterna.SetActive(false);
+        lanterna.SetActive(true);
     }
 
     // Update is called once per frame

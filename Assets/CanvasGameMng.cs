@@ -1,5 +1,5 @@
+using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,6 +16,7 @@ public class CanvasGameMng : MonoBehaviour
     }
 
     public bool fimDeJogo;
+    private HelicopteroControlador helicoptero;
 
     [Header("Configurações Status Player")]
     public TextMeshProUGUI txtVida;
@@ -71,6 +72,9 @@ public class CanvasGameMng : MonoBehaviour
 
         //Definir o total de zumbis mortos para 0
         totalZumbisMortos = 0;
+
+        //Referenciar o helicoptero na variavel
+        helicoptero = FindFirstObjectByType<HelicopteroControlador>();
     }
 
     // Update is called once per frame
@@ -147,10 +151,14 @@ public class CanvasGameMng : MonoBehaviour
         pnlStatusPlayer.SetActive(false);
         pnlTopo.SetActive(false);
 
-        //...
+        //Desativar a camera do player
+        PlayerMng.VisaoCamera.DesativarCameraPlayer();
 
-        //Exibir tela final
-        ExibirTelaFinal();
+        //Ativar a camera do helicoptero
+        helicoptero.AtivarCameraHelicoptero();
+
+        //Ativar voo do helicoptero
+        StartCoroutine(IniciarVooHelicoptero());
     }
 
     public void ExibirTelaFinal(){
@@ -217,5 +225,10 @@ public class CanvasGameMng : MonoBehaviour
     public void IncrementarMortesZumbi(){
         //Incrementar na variável um zumbi morto
         totalZumbisMortos++;
+    }
+
+    IEnumerator IniciarVooHelicoptero(){
+        yield return new WaitForSeconds(3f);
+        helicoptero.IniciarVoo();
     }
 }
