@@ -75,11 +75,22 @@ public class CanvasGameMng : MonoBehaviour
 
         //Referenciar o helicoptero na variavel
         helicoptero = FindFirstObjectByType<HelicopteroControlador>();
+
+        //Ocultar tela loading
+        CanvasLoadingMng.Instance.OcultarTelaDeCarregamento();
+
+        //Tocar o audio do game
+        AudioMng.Instance.PlayAudioGame();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Verificar se apertou Esc para voltar ao menu
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            VoltarMenu();
+        }
+
         AtualizarMunicaoUI();
         ContarTempo();
     }
@@ -214,9 +225,9 @@ public class CanvasGameMng : MonoBehaviour
         txtVida.text = $"+{vidaJogador}";
     }
 
-    private void ReiniciarJogo(){
+    public void ReiniciarJogo(){
         //Exibir tela de carregamento
-        //...
+        CanvasLoadingMng.Instance.ExibirTelaDeCarregamento();
 
         //Reiniciar a cena do jogo
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -230,5 +241,13 @@ public class CanvasGameMng : MonoBehaviour
     IEnumerator IniciarVooHelicoptero(){
         yield return new WaitForSeconds(3f);
         helicoptero.IniciarVoo();
+    }
+
+    public void VoltarMenu(){
+        //Exibir tela de loading
+        CanvasLoadingMng.Instance.ExibirTelaDeCarregamento();
+
+        //Voltar para o menu
+        SceneManager.LoadScene(0);
     }
 }

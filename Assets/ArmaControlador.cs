@@ -12,6 +12,9 @@ public class ArmaControlador : MonoBehaviour
     public Transform posicaoCapsula; //Posição da casula a ser ejeta
     [SerializeField] private int pente; //A munção atual no pente da arma
     [SerializeField] private int municaoAtual;//Munição atual que a arma tem
+    public AudioSource audioSource;
+    public AudioClip[] audios;//0 - Tiro, 1 - Recarregamento, 2 - Arma Sem Bala, 3 - Usar Arma
+
 
     private Animator animator;
 
@@ -32,6 +35,9 @@ public class ArmaControlador : MonoBehaviour
 
         //Definir a munição atual
         municaoAtual = municaoMaxima;
+
+        //Atualizar o volume da arma
+        audioSource.volume = AudioMng.Instance.volumeVFX;
     }
 
     private void PlayDisparo(){
@@ -87,6 +93,9 @@ public class ArmaControlador : MonoBehaviour
     public void RecarregarArma(){
         //Verificar se a arma tem munição para recarregar e se o pente está sem bala
         if(municaoAtual > 0 && pente < municaoPorPente){
+            //Tocar o audio de recarregamento
+            audioSource.PlayOneShot(audios[1]);
+
             //Obter a quantidade de balas que a arma precisa para preencher o pente
             int diferenca = municaoPorPente - pente;
 
@@ -122,12 +131,18 @@ public class ArmaControlador : MonoBehaviour
 
         //Verificar se acabou a munição no pente
         if(pente <= 0){
+            //Ativar o audio de sem munição
+            audioSource.PlayOneShot(audios[2]);
+
             //Ativar a animação de sem munição
             PlaySemMunicao();
 
             //Forçar que o pente fique em 0
             pente = 0;
         }
+
+        //Ativar audio do disparo
+        audioSource.PlayOneShot(audios[0]);
 
         //Ejetar a capsula
         EjetarCapsula();
@@ -154,5 +169,10 @@ public class ArmaControlador : MonoBehaviour
             //Definir a munição maxima na munição atual
             municaoAtual = municaoMaxima;
         }
+    }
+
+    public void AtivarAudioSelecaoArma(){
+        //Tocar o audio de selecao da arma
+        audioSource.PlayOneShot(audios[3]);
     }
 }

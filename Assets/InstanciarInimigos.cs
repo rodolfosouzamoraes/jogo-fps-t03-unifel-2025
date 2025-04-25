@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using JetBrains.Annotations;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,11 +8,9 @@ public class InstanciarInimigos : MonoBehaviour
     public int maximoInimigosNaFase; //Definir o máximo de inimigos que pode ter no jogo
     public float distanciaInicialParaNovoInimigo; //Distancia quando o jogo começar 
     public float distanciaParaNovoInimigo; //Distancia para novos inimigos que surgirem após o inicio do jogo
+    public AudioClip[] audiosZumbi; //Audios dos zumbis
     private float tempoProximoInimigo;
     private int totalInimigosInstanciados; //Armazena o total de inimigos instanciados em tempo real no jogo
-
-    //Variavel de audios dos zumbis
-    //...
 
     // Start is called before the first frame update
     void Start()
@@ -78,7 +72,8 @@ public class InstanciarInimigos : MonoBehaviour
         novoInimigo.GetComponent<InimigoControlador>().ReferenciarInimigo(this);
 
         //Configurar o audio do inimigo sorteado
-        //...
+        var audioSorteado = new System.Random().Next(0,audiosZumbi.Length);
+        novoInimigo.GetComponent<InimigoControlador>().ConfigurarAudio(audiosZumbi[audioSorteado]);
 
         //Posicionar o zumbi na posição sorteada
         var agent = novoInimigo.GetComponent<NavMeshAgent>();

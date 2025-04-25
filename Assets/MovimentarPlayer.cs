@@ -18,6 +18,11 @@ public class MovimentarPlayer : MonoBehaviour
     public float forcaGravidade; //Define a força de decida do objeto refente a sua gravidade
     private Vector3 direcaoMovimento; //Define a direção para onde o objeto deve ir
     private CharacterController characterController; //Variavel de controle do personagem
+    
+    [Header("Configurações Audios de Movimento")]
+    public AudioSource audioSource;
+    public AudioClip[] audiosMovimentacao; //0 - Walking, 1 - Running
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +38,9 @@ public class MovimentarPlayer : MonoBehaviour
         //Travar e ocular o mouse no inicio do jogo
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        //Definir volume do audio
+        audioSource.volume = AudioMng.Instance.volumeVFX;
     }
 
     // Update is called once per frame
@@ -80,6 +88,9 @@ public class MovimentarPlayer : MonoBehaviour
         //Calcular a direcao do player
         direcaoMovimento = (frente * velocidadeFrente) + (direita * velocidadeLateral);
 
+        //Verificar se está se movimentando para poder tocar o audio de movimentação
+        TocarAudioMovimentacao(direcaoMovimento,estaCorrendo);
+
         //Verificar se o jogador está em contato com o chão para poder efetuar o pulo
         if(Input.GetButton("Jump") && characterController.isGrounded == true){
             //Definir a direção em Y para cima e assim efetuar o pulo posteriormente
@@ -118,5 +129,41 @@ public class MovimentarPlayer : MonoBehaviour
 
         //Definir a rotação do player
         transform.rotation *= Quaternion.Euler(0, rotacaoY  ,0);
+    }
+
+    private void TocarAudioMovimentacao(Vector3 direcaoMovimento, bool estaCorrendo){
+        if(direcaoMovimento != Vector3.zero){
+            //Verificar se ele está correndo
+            if(estaCorrendo == true){
+                //Verificar se o audio atual é diferente do audio de corrida
+                if(audioSource.clip != audiosMovimentacao[1]){
+                    //Fazer a troca para o audio de corrida
+                    audioSource.Stop();
+                    audioSource.clip = audiosMovimentacao[1];
+                    audioSource.Play();
+                }
+            }
+            else{
+                //Verificar se o audio atual é diferente do audio de caminhada
+                if(audioSource.clip != audiosMovimentacao[0]){
+                    //Fazer a troca para o audio de caminhada
+                    audioSource.Stop();
+                    audioSource.clip = audiosMovimentacao[0];
+                    audioSource.Play();
+                }
+            }
+            //Verificar se o audio não está tocando
+            if(audioSource.isPlaying == false){
+                audioSource.Play();
+            }
+        }
+        else{
+            //Parar o audio
+            audioSource.Stop();
+        }
+    }
+
+    public void MutarAudioMovimentacao(){
+        audioSource.volume = 0;
     }
 }

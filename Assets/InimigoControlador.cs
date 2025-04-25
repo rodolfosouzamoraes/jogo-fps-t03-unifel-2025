@@ -18,7 +18,7 @@ public class InimigoControlador : MonoBehaviour
     private bool estaVendoPlayer;//Define se o inimigo está vendo o player
     private SuporteAnimacaoInimigo animacaoInimigo; //Controlar as animações do inimigo
     private InstanciarInimigos instanciarInimigos; //Variavel do script que controla os inimigos no jogo
-
+    private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +38,7 @@ public class InimigoControlador : MonoBehaviour
         capsuleCollider = GetComponent<CapsuleCollider>();
 
         //Referenciar o suporte da animação
-        animacaoInimigo = GetComponentInChildren<SuporteAnimacaoInimigo>();
+        animacaoInimigo = GetComponentInChildren<SuporteAnimacaoInimigo>();        
     }
 
     // Update is called once per frame
@@ -186,5 +186,19 @@ public class InimigoControlador : MonoBehaviour
     public void ReferenciarInimigo(InstanciarInimigos referencia){
         //Referenciar o script na variavel
         instanciarInimigos = referencia;
+    }
+
+    public void ConfigurarAudio(AudioClip audioClip){   
+        //Referenciar o audio Source
+        audioSource = GetComponent<AudioSource>();
+
+        //Definir o volume
+        audioSource.volume = AudioMng.Instance.volumeVFX;
+
+        //Colocar o audio do zumbi
+        audioSource.clip = audioClip;
+
+        //Tocar o audio
+        audioSource.Play();
     }
 }

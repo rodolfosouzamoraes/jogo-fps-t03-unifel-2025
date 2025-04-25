@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -10,6 +8,7 @@ public class ItemMunicao : MonoBehaviour
     public TextMeshProUGUI txtQtdMunicao;
     public GameObject iconePistola;
     public GameObject iconeFuzil;
+    public AudioClip audioMunicao;
     private int municaoParaPistola;
     private int municaoParaFuzil;
     private int idArma; //1 - Pistola / 2 - Fuzil
@@ -85,6 +84,8 @@ public class ItemMunicao : MonoBehaviour
                     PlayerMng.DisparoPlayer.IncrementarMunicaoFuzil(municaoParaFuzil);
                 break;
             }
+
+            AudioMng.Instance.PlayAudioVFX(audioMunicao);
 
             //Destruir o objeto
             Destroy(gameObject);

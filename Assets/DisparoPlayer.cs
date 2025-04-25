@@ -72,6 +72,9 @@ public class DisparoPlayer : MonoBehaviour
         //Armazenar o script da arma que está ativa
         armaAtiva = idArma == 1 ? pistolaControlador : idArma == 2 ? fuzilControlador : null;
 
+        //Tocar audio de selecao de arma
+        armaAtiva.AtivarAudioSelecaoArma();
+
         //Atualiza o id da arma ativa
         idArmaAtiva = idArma;
     }

@@ -455,6 +455,7 @@ MonoBehaviour:
   txtQtdMunicao: {fileID: 8163961714075288268}
   iconePistola: {fileID: 3336538428992436741}
   iconeFuzil: {fileID: 4148214198273802255}
+  audioMunicao: {fileID: 8300000, guid: 00bc68c4f81b0484dac074ee87c8230b, type: 3}
 --- !u!1 &4148214198273802255
 GameObject:
   m_ObjectHideFlags: 0

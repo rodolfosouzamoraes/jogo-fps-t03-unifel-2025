@@ -966,3 +966,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d0a413daf174248a15ceae95ec4264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMedkit: {fileID: 8300000, guid: 3c258dca8d6cd55458bf7e546ebc1a30, type: 3}
